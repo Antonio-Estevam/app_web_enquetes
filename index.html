@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enquetes</title>
+
+    <link rel="stylesheet" href="style_globala.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,700;1,600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <div class="content" >
+            <img src="./imgs/question-circle-regular.svg" alt="Logo" id="logo">
+
+            <h1>
+                Faça o login para <br>
+                criar sua enquete 
+            </h1>
+
+            <form action="./html_php/valida_usu.php" method="GET">
+
+                <input type="email" name="email_logar" id="email_logar" placeholder="E-mail" required>
+                <input type="password" name="senha_logar" id="senha_logar" placeholder="Senha" required>
+
+                <a href="./html_php/criar_log.html">
+                    Criar login
+                </a>
+
+                <input type="submit" value="Logar">
+
+            </form>
+        </div>
+    </main>
+    
+</body>
+</html>
