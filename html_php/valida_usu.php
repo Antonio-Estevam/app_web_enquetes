@@ -1,37 +1,38 @@
 <?php
 
+include("configDB.php");
+
 $email=$_GET["email_logar"];
 $senha=$_GET["senha_logar"];
 
-$valid_email = "jhonnyimmbe@gmail.com";
-$valid_senha = "1234";
 
-$nome_usu1 = 'Jhonny Estevam';
+$registro=$base->query("SELECT iduser, username FROM inqueetesdb.user where user_email ='".$email."' and user_passl = '".$senha."'")->fetchAll(PDO::FETCH_OBJ);
 
 
-echo"Bem vindo ".$email.". Sua senha ".$senha." é uma droga";
 
-if($email == $valid_email){
 
-    if($senha == $valid_senha){
+#var_dump($registro);
 
-        session_start();
+if($registro){
+    foreach ($registro as $user) :
+        #criando sessão
 
-        $_SESSION['email_usu'] = $email;
-        $_SESSION['nome_usu'] = $nome_usu1;
+        session_start(); 
 
-        #echo $_SESSION[cod_usu];
+        $_SESSION["id_usu"] = $user -> iduser;
+        $_SESSION["nome_usu"] = $user -> username;       
+
+        #echo ($_SESSION["nome_usu"]);
 
         header("Location:logado.php");
-    }else{
-        echo("\n Burro emm!!!");
-    }
+        
 
+
+    endforeach;
 }else{
-    echo("\n Burro emm!!!");
-}
 
+    echo("\n <br><br><br><h2><center>Email ou senha Inválido! <center><h2>");
+    header('Refresh: 2;URL=../index.html'); 
 
-
-
+}  
 ?>

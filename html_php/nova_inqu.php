@@ -13,6 +13,7 @@
     <main>
         <div class="content" >
             <header>
+            
                 <div class="agrup_title">
                     <h1>
                     Escreva <br>
@@ -28,12 +29,26 @@
             </header>
 
 
-            <form action="#" method="get">
+            <form action="enviar_quest.php" method="POST">
             <input type="text" name="pergunta" id="pergunta" placeholder="Escreva aqui sua pergunta..." wrap="hard" required />
 
                 <div id="alternativa">
                  <input type="text" name="alternativa1" id="alternativa1" placeholder="Alternativa 1"/>
                 </div> 
+
+                <input type="hidden" name="id_usu" value = "
+                 <?php
+                  session_start(); 
+                  echo ($_SESSION["id_usu"]);
+                 ?>
+                ">
+                <input type="hidden" name="id_alter" value = "
+                    <?php
+                        echo ("AVS00"); 
+                        echo rand(1000, 9999);
+                        echo date('dmYHis');
+                    ?>
+                ">
 
                 <center><input type="button" value="+"id = 'bt_mais_alt'></center>
 

@@ -16,7 +16,12 @@
                 <div class="agrup_title">
                     <h1>
                         Bem vindo(a) <br>
-                        <span><?php session_start(); echo($_SESSION["nome_usu"]); ?></span>
+                        <span>
+                            <?php 
+                                session_start(); 
+                                echo ($_SESSION["nome_usu"]);
+                             ?>
+                        </span>
                     </h1>
     
                     <h2>
@@ -32,27 +37,32 @@
 
             <legend>Minhas enquetes</legend>
                
-            <div class="minha_inq" >
+            <?php
+                include("configDB.php");
+                $registro=$base->query("SELECT idquestion,question_body FROM inqueetesdb.question where id_user_fk ='".$_SESSION["id_usu"]."'")->fetchAll(PDO::FETCH_OBJ);
+               
+
+                foreach ($registro as $perguntas) :
+                    
+                    echo ('<div class="minha_inq" >');
+                    echo ('<a href="resposta.php?id='.$perguntas -> idquestion.'">');
+                    echo $perguntas -> question_body;
+                    echo ('</a>');
+                    echo ('</div>');
+                endforeach;             
+
+            ?>
+
+
+
+            <!--div class="minha_inq" >
                 <a href="resposta.php?id=0001">                    
                     Se você pudesse ter um super poder, qual seria?                   
                 </a>
-            </div>
-            <div class="minha_inq" >
-                <a href="#">                    
-                    Que personagem de ficção tem a personalidade mais parecida com a sua?                     
-                </a>
-            </div>
-            <div class="minha_inq" >
-                <a href="#">                    
-                 Qual é a sua palavra favorita?                     
-                </a>
-            </div>
-            <div class="minha_inq" >
-                <a href="#">                    
-                    Se você pudesse instantaneamente se tornar um especialista em alguma coisa, o que seria?                    
-                </a>
-            </div>
+            </div-->
 
+
+                        <br>
             <a href="../index.html" id="sair">
                 sair 
             </a>
