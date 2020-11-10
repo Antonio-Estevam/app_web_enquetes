@@ -42,13 +42,7 @@
                   echo ($_SESSION["id_usu"]);
                  ?>
                 ">
-                <input type="hidden" name="id_alter" value = "
-                    <?php
-                        echo ("AVS00"); 
-                        echo rand(1000, 9999);
-                        echo date('dmYHis');
-                    ?>
-                ">
+                <input type="hidden" name="id_alter" value = "<?php echo("AVS"); echo rand(100, 999); echo date('dmYHs');?>">
 
                 <center><input type="button" value="+"id = 'bt_mais_alt'></center>
 

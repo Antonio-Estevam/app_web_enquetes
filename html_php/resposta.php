@@ -10,7 +10,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,700;1,600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <?php #$id_perg=$_GET["id"]; echo($id_perg); ?>
+    <?php 
+
+        include("configDB.php");
+        $id_perg=$_GET["cod"];
+
+        $registro=$base->query("SELECT * FROM inqueetesdb.question where idquestion = '".$id_perg."';")->fetchAll(PDO::FETCH_OBJ);      
+         
+     ?>
     <main>
         <div class="content" >
             <header>
@@ -20,11 +27,25 @@
                 </h1>
 
                 <h2>
-                     "<span>Qual o melhor lugar do mundo para se viver?</span>"
+                        <?php
+                        foreach ($registro as $pergunta) :
+                            echo ('"<span>'.$pergunta-> question_body.'</span><br><br>"');
+                        endforeach;  
+                        
+                        ?> 
+                        <span> <strong>Link para votar:</strong><br> app_web_enquetes/html_php/resposta.php?cod=<?php echo($id_perg);?> </span>
                 </h2>
             </header>
 
             <div id="cxresult">
+
+            <?php 
+                $registro2=$base->query("SELECT * FROM inqueetesdb.option where id_question_fk ='".$id_perg."';")->fetchAll(PDO::FETCH_OBJ);    
+                
+                foreach ($registro as $pergunta) :
+                endforeach; 
+            
+            ?>
                 <div class="result">
 
                     <div class="result_cont">
@@ -34,58 +55,6 @@
                             </h3>
 
                             <p class="votaram">
-                                Luana silva, julia , douglas Luana silva, julia , douglas, Luana silva, julia , douglas  
-                                Luana silva, julia , douglas  ,Luana silva, julia , douglas 
-                            </p>
-                        </div>                    
-
-                        <p class="pocentagem">
-                            10%
-                        </p>
-                    </div>
-                </div>
-
-
-                <div class="result">
-
-                    <div class="result_cont">
-                        <div class="agrup_result">
-                            <h3>
-                                <span>2. Viena, Áustria</span>
-                            </h3>
-
-                            <p class="votaram">
-                                Luana silva, julia , douglas Luana silva, julia , douglas, Luana silva, julia , douglas  
-                                Luana silva, julia , douglas  ,Luana silva, julia , douglas 
-                            </p>
-                        </div>                    
-
-                        <p class="pocentagem">
-                            10%
-                        </p>
-                    </div>
-                </div>
-
-
-                <div class="result">
-
-                    <div class="result_cont">
-                        <div class="agrup_result">
-                            <h3>
-                                <span>3. Viena, Áustria</span>
-                            </h3>
-
-                            <p class="votaram">
-                                Luana silva, julia , douglas Luana silva, julia , douglas, Luana silva, julia , douglas  
-                                Luana silva, julia , douglas  ,Luana silva, julia , douglas 
-                                Luana silva, julia , douglas Luana silva, julia , douglas, Luana silva, julia , douglas  
-                                Luana silva, julia , douglas  ,Luana silva, julia , douglas 
-                                Luana silva, julia , douglas Luana silva, julia , douglas, Luana silva, julia , douglas  
-                                Luana silva, julia , douglas  ,Luana silva, julia , douglas 
-                                Luana silva, julia , douglas Luana silva, julia , douglas, Luana silva, julia , douglas  
-                                Luana silva, julia , douglas  ,Luana silva, julia , douglas 
-                                Luana silva, julia , douglas Luana silva, julia , douglas, Luana silva, julia , douglas  
-                                Luana silva, julia , douglas  ,Luana silva, julia , douglas 
                                 Luana silva, julia , douglas Luana silva, julia , douglas, Luana silva, julia , douglas  
                                 Luana silva, julia , douglas  ,Luana silva, julia , douglas 
                             </p>
