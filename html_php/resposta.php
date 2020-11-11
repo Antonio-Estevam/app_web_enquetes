@@ -41,17 +41,18 @@
 
             <?php 
                 $registro2=$base->query("SELECT * FROM inqueetesdb.option where id_question_fk ='".$id_perg."';")->fetchAll(PDO::FETCH_OBJ);    
-                
-                foreach ($registro as $pergunta) :
-                endforeach; 
-            
-            ?>
+                $num_alt = 0; 
+                foreach ($registro2 as $alternativas) :
+                ?>
                 <div class="result">
 
                     <div class="result_cont">
                         <div class="agrup_result">
                             <h3>
-                                <span>1. Viena, Áustria</span>
+                                <span><?php 
+                                    $num_alt ++;
+                                    echo($num_alt.". ". $alternativas -> option_body);
+                                ?></span>
                             </h3>
 
                             <p class="votaram">
@@ -65,6 +66,10 @@
                         </p>
                     </div>
                 </div>
+            <?php 
+            endforeach; 
+            
+            ?>
             </div>
 
             <a href="./logado.php" id="sair">

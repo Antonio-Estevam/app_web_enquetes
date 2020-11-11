@@ -45,7 +45,7 @@
                 foreach ($registro as $perguntas) :
                     
                     echo ('<div class="minha_inq" >');
-                    echo ('<a href="resposta.php?cod='.$perguntas -> idquestion.'">');
+                    echo ('<a href="responder.php?cod='.$perguntas -> idquestion.'">');
                     echo $perguntas -> question_body;
                     echo ('</a>');
                     echo ('</div>');
