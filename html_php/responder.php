@@ -16,7 +16,7 @@
     $id_perg=$_GET["cod"];
 
     $registro=$base->query("SELECT * FROM inqueetesdb.question where idquestion = '".$id_perg."';")->fetchAll(PDO::FETCH_OBJ);      
-    
+    $num_alt = 0; 
     ?>
     <main>
         <div class="content" >
@@ -48,13 +48,13 @@
                   $registro_altern =$base->query("SELECT * FROM inqueetesdb.option where id_question_fk = '".$id_perg."';")->fetchAll(PDO::FETCH_OBJ);  
 
                   foreach ($registro_altern as $alternativa) : 
-                     
+                    $num_alt ++; 
                 ?>   
                 <div class="opc">
                     
                     <div class="opcCont">
                         <button class="bt_opcs" onclick='enviarRes("<?php echo $alternativa -> idoption; ?>")' >
-                            <span>3. <?php echo $alternativa -> option_body; ?></span>
+                            <span><?php echo($num_alt.". ".$alternativa -> option_body.""); ?></span>
                         </button>
                     </div>
 
@@ -65,7 +65,7 @@
             </div>
 
             <form action="./depois_voto.php" method="get">
-                <input type="hidden" name="id_pergunta" id="id_pergunta" value="">
+                <input type="hidden" name="id_pergunta" id="id_pergunta" value="<?php echo($id_perg); ?>">
                 <input type="hidden" name="opcIn" id="opcIn" value="">
                 <input type="text" name="nomeResp" id="nomeResp" placeholder="Seu nome ou apelido" required>
                 <input type="submit" value="Enviar" id="enviar">

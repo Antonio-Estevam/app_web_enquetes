@@ -65,6 +65,11 @@ main {
     font-size: 20px;
 }
 
+.result_select{
+    color: #8BF5A4;
+    font-size: 22px;
+}
+
 .result .result_cont .agrup_result .votaram{
     color: #e2e2e2bd;
     margin-left: 10px;

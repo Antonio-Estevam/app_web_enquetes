@@ -10,7 +10,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,700;1,600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <?php #$id_perg=$_GET["id"]; echo($id_perg); ?>
+    <?php 
+    include("configDB.php");
+
+    $id_perg=$_GET["id_pergunta"];
+    $id_res=$_GET["opcIn"];
+    $nomeResp=$_GET["nomeResp"];
+
+    #$registro_ins=$base->query("INSERT INTO `inqueetesdb`.`answer` (`answer_name`, `answer_id_user_fk`, `answer_id_question_fk`, `answer_id_option_fk`) VALUES ('".$nomeResp."', '".$usu."', '".$id_perg."', '".$id_res."');");
+
+    $registro=$base->query("SELECT * FROM inqueetesdb.question where idquestion = '".$id_perg."';")->fetchAll(PDO::FETCH_OBJ);     
+    $num_alt = 0; 
+    ?>
     <main>
         <div class="content" >
             <header>
@@ -20,58 +31,52 @@
                 </h1>
 
                 <h2>
-                     "<span>Qual o melhor lugar do mundo para se viver?</span>"
+                     "<span>
+                        <?php
+                            foreach ($registro as $pergunta) : 
+                             echo $pergunta -> question_body;
+                             $usu = $pergunta -> id_user_fk;
+                            endforeach; 
+                            
+                            $registro_ins=$base->query("INSERT INTO `inqueetesdb`.`answer` (`answer_name`, `answer_id_user_fk`, `answer_id_question_fk`, `answer_id_option_fk`) VALUES ('".$nomeResp."', ".$usu.", '".$id_perg."', '".$id_res."');");
+                        ?>
+                     </span>"
                 </h2>
             </header>
 
             <div id="cxresult">
-                <div class="result">
+                <?php 
+                    $registro_altern =$base->query("SELECT * FROM inqueetesdb.option where id_question_fk = '".$id_perg."';")->fetchAll(PDO::FETCH_OBJ);  
 
-                    <div class="result_cont">
-                        <div class="agrup_result">
-                            <h3>
-                                <span>1. Viena, Áustria</span>
-                            </h3>
-                        </div>                    
+                    foreach ($registro_altern as $alternativa) : 
+                        $num_alt ++; 
+                    ?>
+                        <div class="result">
 
-                        <p class="pocentagem">
-                            10%
-                        </p>
-                    </div>
-                </div>
+                            <div class="result_cont">
+                                <div class="agrup_result">
+                                    <h3 <?php if($id_res == $alternativa -> idoption){ echo('class="result_select"');}else{}  ?> >
+                                        <span><?php echo($num_alt.". ".$alternativa -> option_body.""); ?></span>
+                                    </h3>
+                                </div>                    
 
+                                <p class="pocentagem">
+                                    Votos 
+                                    <?php 
 
-                <div class="result">
+                                        $registro_votos=$base->query("SELECT count(*) as votos  FROM inqueetesdb.answer where answer_id_option_fk = '".$alternativa -> idoption."' and answer_id_question_fk = '".$id_perg."';")->fetchAll(PDO::FETCH_OBJ);  
+                                        foreach ($registro_votos as $votos) :
 
-                    <div class="result_cont">
-                        <div class="agrup_result">
-                            <h3>
-                                <span>2. Viena, Áustria</span>
-                            </h3>
-                            
-                        </div>                    
-
-                        <p class="pocentagem">
-                            10%
-                        </p>
-                    </div>
-                </div>
-
-
-                <div class="result">
-
-                    <div class="result_cont">
-                        <div class="agrup_result">
-                            <h3>
-                                <span>3. Viena, Áustria</span>
-                            </h3>
-                        </div>                    
-
-                        <p class="pocentagem">
-                            10%
-                        </p>
-                    </div>
-                </div>
+                                            echo($votos -> votos);                                        
+                                        endforeach;     
+                                    
+                                    ?>
+                                </p>
+                            </div>
+                        </div>
+                <?php 
+                    endforeach; 
+                ?>        
             </div>
 
             <a href="../index.html" id="">
