@@ -33,7 +33,10 @@
                         endforeach;  
                         
                         ?> 
-                        <span> <strong>Link para votar:</strong><br> app_web_enquetes/html_php/resposta.php?cod=<?php echo($id_perg);?> </span>
+                        <span> 
+                            <strong>Link para votar:</strong><br> app_web_enquetes/html_php/responder.php?cod=<?php echo($id_perg);?> <br><br>
+                            <strong>Código da enquete:</strong><?php echo($id_perg);?> 
+                        </span>
                 </h2>
             </header>
 
@@ -56,13 +59,30 @@
                             </h3>
 
                             <p class="votaram">
-                                Luana silva, julia , douglas Luana silva, julia , douglas, Luana silva, julia , douglas  
-                                Luana silva, julia , douglas  ,Luana silva, julia , douglas 
+                                <?php 
+ 
+                                        $registro_votaram=$base->query("SELECT answer_name FROM inqueetesdb.answer where answer_id_option_fk = '".$alternativas -> idoption."' and answer_id_question_fk = '".$id_perg."';")->fetchAll(PDO::FETCH_OBJ);  
+                                        foreach ($registro_votaram as $nm_voto) :
+
+                                            echo(" ".$nm_voto -> answer_name.",");
+
+                                        endforeach;     
+                                    
+                                    ?>
                             </p>
                         </div>                    
 
                         <p class="pocentagem">
-                            10%
+                        Votos 
+                                    <?php 
+
+                                        $registro_votos=$base->query("SELECT count(*) as votos  FROM inqueetesdb.answer where answer_id_option_fk = '".$alternativas -> idoption."' and answer_id_question_fk = '".$id_perg."';")->fetchAll(PDO::FETCH_OBJ);  
+                                        foreach ($registro_votos as $votos) :
+
+                                            echo($votos -> votos);                                        
+                                        endforeach;     
+                                    
+                                    ?>
                         </p>
                     </div>
                 </div>

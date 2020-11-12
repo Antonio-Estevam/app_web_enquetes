@@ -6,7 +6,7 @@
     <title>Enquetes</title>
 
     <link rel="stylesheet" href="../style_globala.css">
-    <link rel="stylesheet" href="../css/deois_voto.css">
+    <link rel="stylesheet" href="../css/depois_voto.css">
     <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,700;1,600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -55,12 +55,12 @@
 
                             <div class="result_cont">
                                 <div class="agrup_result">
-                                    <h3 <?php if($id_res == $alternativa -> idoption){ echo('class="result_select"');}else{}  ?> >
+                                    <h3 <?php if($id_res == $alternativa -> idoption){ echo('id="result_select"');}else{}  ?> >
                                         <span><?php echo($num_alt.". ".$alternativa -> option_body.""); ?></span>
                                     </h3>
                                 </div>                    
 
-                                <p class="pocentagem">
+                                <p class="pocentagem" <?php if($id_res == $alternativa -> idoption){ echo('id="result_select"');}else{}  ?>>
                                     Votos 
                                     <?php 
 
