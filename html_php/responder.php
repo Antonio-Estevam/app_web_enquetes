@@ -47,6 +47,15 @@
                 <?php 
                   $registro_altern =$base->query("SELECT * FROM inqueetesdb.option where id_question_fk = '".$id_perg."';")->fetchAll(PDO::FETCH_OBJ);  
 
+                  if(!$registro_altern){
+                    ?>
+                    <script type="text/javascript">
+                     alert("Código de Enquete inválido!!!");
+                    </script>
+                    <?php
+                    header('Refresh: 0;URL=../index.html'); 
+                  }else{}
+
                   foreach ($registro_altern as $alternativa) : 
                     $num_alt ++; 
                 ?>   
@@ -70,6 +79,11 @@
                 <input type="text" name="nomeResp" id="nomeResp" placeholder="Seu nome ou apelido" required>
                 <input type="submit" value="Enviar" id="enviar">
             </form>
+
+
+            <a href="../index.html" id="sair">
+                sair 
+            </a>
 
 
 
